@@ -18,14 +18,16 @@
 
 <script>
 // LIFFの初期化
-liff.init({ liffId: '2001269046-RZ90vdYB' }, () => {
-    if (liff.isLoggedIn()) {
-        // ユーザーがログインしている場合、直ちにQRコードリーダーを開く
-        openQRCodeReader1();
-    } else {
+liff.init({ liffId: '2001269046-RZ90vdYB' }).then(() => {
+    if (!liff.isLoggedIn()) {
         // ログインが必要な場合、ログインページを表示
         liff.login();
+    } else {
+        // ユーザーがログインしている場合、直ちにQRコードリーダーを開く
+        openQRCodeReader1();
     }
+}).catch((err) => {
+    console.error('LIFFの初期化に失敗しました', err);
 });
 
 // QRコードリーダーを開く関数
