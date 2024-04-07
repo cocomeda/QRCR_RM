@@ -39,6 +39,11 @@ function openQRCodeReader1() {
                 console.log("QRコードスキャン結果:", result.value);
                 let qr_data = result.value; // QRコードのデータ
                 sendQRDataToGAS1(qr_data); // Google Apps ScriptにQRコードデータを送信する
+		    
+		    setTimeout(function() {
+    console.log('3秒経過しました');
+}, 1000); // 3000ミリ秒（＝3秒）後にコールバック関数が実行される
+		    
                 liff.closeWindow();
             } else {
                 console.error('No QR code is detected');
