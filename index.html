@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>coco medaka 35</title>
+
+	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+  
+
+   
+</head>
+<body>
+
+
+
+
+<script>
+// LIFFの初期化
+liff.init({ liffId: '1657196041-vDWabr0g' }, () => {
+    if (liff.isLoggedIn()) {
+        // ユーザーがログインしている場合、直ちにQRコードリーダーを開く
+        openQRCodeReader1();
+    } else {
+        // ログインが必要な場合、ログインページを表示
+        liff.login();
+    }
+});
+
+// QRコードリーダーを開く関数
+function openQRCodeReader1() {
+    liff.scanCode()
+        .then(result => {
+            if (result.value) {
+                // QRコードのスキャンが成功した場合
+                console.log("QRコードスキャン結果:", result.value);
+                let qr_data = result.value; // QRコードのデータ
+                sendQRDataToGAS1(qr_data); // Google Apps ScriptにQRコードデータを送信する
+                liff.closeWindow();
+            } else {
+                console.error('No QR code is detected');
+            }
+        })
+        .catch(err => {
+            console.error('Error scanning QR code:', err);
+        });
+}
+
+// QRコードデータをGoogle Apps Scriptに送信する関数
+function sendQRDataToGAS1(qr_data) {
+    const idToken = liff.getIDToken();
+
+    // QRコードデータとIDトークンをGASに送信
+    $.ajax({
+        url: 'https://script.google.com/macros/s/AKfycbxCbp2oZyMyYqsqubzueOGU1GqqWWCF3DsrQULPi_BVfRfCAPWXu_RQCWu0MSxSy6Wf8A/exec',
+        type: 'POST',
+        data: { idToken: idToken, qr_data: qr_data },
+        success: function (response) {
+            // 成功時の処理
+            console.log(response);
+        },
+        error: function (error) {
+            // エラー時の処理
+            console.error(error);
+            alert('Failed to send QR data to GAS.');
+        }
+    });
+}
+
+</script>
+</body>
