@@ -12,7 +12,6 @@
 <body>
 
 <script>
-
 // LIFFの初期化
 liff.init({ liffId: '1657196041-0B5JEMmG' }).then(() => {
     if (!liff.isLoggedIn()) {
@@ -35,13 +34,16 @@ function openQRCodeReader1() {
                 console.log("QRコードスキャン結果:", result.value);
                 let qr_data = result.value; // QRコードのデータ
                 sendQRDataToGAS1(qr_data); // Google Apps ScriptにQRコードデータを送信する
-                liff.closeWindow();
             } else {
                 console.error('No QR code is detected');
             }
         })
         .catch(err => {
             console.error('Error scanning QR code:', err);
+        })
+        .finally(() => {
+            // QRコードリーダーを閉じる
+            liff.closeWindow();
         });
 }
 
@@ -65,7 +67,5 @@ function sendQRDataToGAS1(qr_data) {
         }
     });
 }
-
-
 </script>
 </body>
