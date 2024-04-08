@@ -17,7 +17,6 @@
 
 
 <script>
-
 // LIFFの初期化
 liff.init({ liffId: '1657196041-0B5JEMmG' }).then(() => {
     if (!liff.isLoggedIn()) {
@@ -40,7 +39,6 @@ function openQRCodeReader1() {
                 console.log("QRコードスキャン結果:", result.value);
                 let qr_data = result.value; // QRコードのデータ
                 sendQRDataToGAS1(qr_data); // Google Apps ScriptにQRコードデータを送信する
-                liff.closeWindow();
             } else {
                 console.error('No QR code is detected');
             }
@@ -56,21 +54,23 @@ function sendQRDataToGAS1(qr_data) {
 
     // QRコードデータとIDトークンをGASに送信
     $.ajax({
-        url: 'https://script.google.com/macros/s/AKfycbxOr-zS-vPz5nAsq9RhKgNqcQGnUh4NTWGRZToFLiAKykAdd3X5S8ohw_gJx5FxM17Y/exec',
+        url: 'https://script.google.com/macros/s/AKfycbxOr-zS-vPz5nAsq9RhKgNqcUh4NTWGRZToFLiA_gJx5FxM17Y/exec',
         type: 'POST',
         data: { idToken: idToken, qr_data: qr_data },
         success: function (response) {
             // 成功時の処理
             console.log(response);
+            // Liffウィンドウを閉じる
+            liff.closeWindow();
         },
         error: function (error) {
             // エラー時の処理
             console.error(error);
             alert('Failed to send QR data to GAS.');
+            // Liffウィンドウを閉じる
+            liff.closeWindow();
         }
     });
 }
-
-
 </script>
 </body>
