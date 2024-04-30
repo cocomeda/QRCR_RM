@@ -52,7 +52,7 @@ function sendQRDataToGAS1(qr_data) {
 
     // QRコードデータとIDトークンをGASに送信
     $.ajax({
-        url: 'https://script.google.com/macros/s/AKfycbzZdCxVZrCwJnW0ELWSQGMQOXxwD89hgAOTak0kBfZvFW6CKyf-J2QEJwAovlkeWJ8l/exec',
+        url: 'https://script.google.com/macros/s/AKfycbxyhTNs7YffYrfTA31-ieQe7MpPESoexxOCLaXYpNzBw9CW3mhUCEUxKnCPLFKuyn59/exec',
         type: 'POST',
         data: { idToken: idToken, qr_data: qr_data },
         success: function (response) {
