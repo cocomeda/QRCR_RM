@@ -2,7 +2,7 @@
 <head>
      <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <title>Code Reader for CoCo medaka</title>
+    <title>Code Reader for CoCo medaka5</title>
 
 	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -52,7 +52,8 @@ function sendQRDataToGAS1(qr_data) {
 
     // QRコードデータとIDトークンをGASに送信
     $.ajax({
-        url: 'https://script.google.com/macros/s/AKfycbx-3-4uwQbi-XJ87p8oY3uiQr9IE_R2lcfiEdH-2tkcN5UbcF7zCGS_ZwqqdT2CFuvO/exec',
+        //url: 'https://script.google.com/macros/s/AKfycbx-3-4uwQbi-XJ87p8oY3uiQr9IE_R2lcfiEdH-2tkcN5UbcF7zCGS_ZwqqdT2CFuvO/exec',
+     url: 'https://script.google.com/macros/s/AKfycbw3GbgfjyXJ6-S9oM8OBdYX0c3js8Zdw4O-KC82QfQS3Wornb3OneUEwsPhCH_q6w7Z/exec',    
         type: 'POST',
         data: { idToken: idToken, qr_data: qr_data },
         success: function (response) {
