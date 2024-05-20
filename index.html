@@ -48,7 +48,7 @@ function openQRCodeReader1() {
                 // QRコードのスキャンが成功した場合
                 console.log("QRコードスキャン結果:", result.value);
                 let qr_data = result.value; // QRコードのデータ
-                showPopup(); // ポップアップを表示
+
                 sendQRDataToGAS1(qr_data); // Google Apps ScriptにQRコードデータを送信する
             } else {
                 console.error('No QR code is detected');
